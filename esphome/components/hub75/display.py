@@ -408,9 +408,13 @@ CONFIG_SCHEMA = cv.All(
 
 
 async def to_code(config):
-    add_idf_component(
-        name="stuartparmenter/esp-hub75",
-        ref="0.1.0",
+    # add_idf_component(
+    #     name="stuartparmenter/esp-hub75",
+    #     ref="0.1.0",
+    # )
+    cg.add_library(
+        "stuartparmenter/esp-hub75",
+        "0.1.0",
     )
 
     # ========================================
