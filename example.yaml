@@ -36,10 +36,7 @@ psram:
   speed: 200MHz
 
 external_components:
-  - source:
-      type: local
-      path: C:/Users/stuart/Builds/hub75-esphome/esphome/components
-    components: [hub75]
+  - source: github://stuartparmenter/hub75-esphome@main
 
 display:
   - platform: hub75
@@ -71,6 +68,7 @@ display:
     clk_pin: 47
 
     bit_depth: 8
+    gamma_correct: CIE1931
     double_buffer: true
     auto_clear_enabled: true
     update_interval: 50ms
