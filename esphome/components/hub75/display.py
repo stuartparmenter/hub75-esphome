@@ -9,6 +9,7 @@ from esphome.const import (
     CONF_BOARD,
     CONF_BRIGHTNESS,
     CONF_CLK_PIN,
+    CONF_GAMMA_CORRECT,
     CONF_ID,
     CONF_LAMBDA,
     CONF_OE_PIN,
@@ -384,6 +385,9 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_DOUBLE_BUFFER): cv.boolean,
             cv.Optional(CONF_BRIGHTNESS): cv.int_range(min=0, max=255),
             cv.Optional(CONF_BIT_DEPTH): cv.int_range(min=6, max=12),
+            cv.Optional(CONF_GAMMA_CORRECT): cv.enum(
+                {"LINEAR": 0, "CIE1931": 1, "GAMMA_2_2": 2}, upper=True
+            ),
             cv.Optional(CONF_MIN_REFRESH_RATE): cv.int_range(min=40, max=200),
             # RGB data pins
             cv.Optional(CONF_R1_PIN): pins.gpio_output_pin_schema,
@@ -416,12 +420,19 @@ CONFIG_SCHEMA = cv.All(
 async def to_code(config):
     # add_idf_component(
     #     name="stuartparmenter/esp-hub75",
-    #     ref="0.1.0",
+    #     ref="0.1.2",
     # )
     cg.add_library(
         "stuartparmenter/esp-hub75",
-        "0.1.0",
+        "0.1.2",
     )
+
+    # Set compile-time configuration via defines
+    if CONF_BIT_DEPTH in config:
+        cg.add_define("HUB75_BIT_DEPTH", config[CONF_BIT_DEPTH])
+
+    if CONF_GAMMA_CORRECT in config:
+        cg.add_define("HUB75_GAMMA_MODE", config[CONF_GAMMA_CORRECT])
 
     # ========================================
     # Step 1: Await all pin expressions
@@ -532,8 +543,6 @@ async def to_code(config):
 
     if CONF_CLOCK_SPEED in config:
         config_fields.append(("output_clock_speed", config[CONF_CLOCK_SPEED]))
-    if CONF_BIT_DEPTH in config:
-        config_fields.append(("bit_depth", config[CONF_BIT_DEPTH]))
 
     config_fields.append(("min_refresh_rate", min_refresh))
 
@@ -547,8 +556,6 @@ async def to_code(config):
 
     if CONF_CLOCK_PHASE in config:
         config_fields.append(("clk_phase_inverted", config[CONF_CLOCK_PHASE]))
-
-    # gamma_mode omitted - uses C++ default (CIE1931)
 
     if CONF_BRIGHTNESS in config:
         config_fields.append(("brightness", config[CONF_BRIGHTNESS]))
