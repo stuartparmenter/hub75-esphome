@@ -1,6 +1,6 @@
 # HUB75 RGB LED Matrix Display Component for ESPHome
 
-This ESPHome component provides support for HUB75 RGB LED matrix panels using the [hub75-esp32](https://github.com/stuartparmenter/hub75-esp32) library, which uses DMA (Direct Memory Access) for efficient, low-CPU-overhead driving of LED matrix panels.
+This ESPHome component provides support for HUB75 RGB LED matrix panels using the [esp-hub75](https://github.com/stuartparmenter/esp-hub75) library, which uses DMA (Direct Memory Access) for efficient, low-CPU-overhead driving of LED matrix panels.
 
 HUB75 displays are RGB LED matrix panels that use parallel row updating to create dynamic, colorful displays. They are commonly available in sizes like 64×32, 64×64, and can be chained together to create larger displays.
 
@@ -397,5 +397,5 @@ If you experience boot issues, consider remapping these pins using the pin confi
 
 - [ESPHome Display Component](https://esphome.io/components/display/index.html)
 - [ESPHome LVGL Component](https://esphome.io/components/lvgl.html)
-- [hub75-esp32 Library](https://github.com/stuartparmenter/hub75-esp32)
+- [esp-hub75 Library](https://github.com/stuartparmenter/esp-hub75)
 - [HUB75 Panel Information](https://www.sparkfun.com/sparkfun-rgb-led-matrix-panel-hookup-guide)
