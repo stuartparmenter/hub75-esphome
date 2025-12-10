@@ -1,5 +1,7 @@
 # HUB75 RGB LED Matrix Display Component for ESPHome
 
+> **Note:** Starting with ESPHome 2025.12, this component is included in ESPHome core. This external component is now deprecated and will no longer be maintained. The built-in component uses the same configuration schema, so to migrate you simply need to remove the `external_components` reference from your configuration. Documentation will be available at [esphome.io](https://esphome.io) once the release is available.
+
 This ESPHome component provides support for HUB75 RGB LED matrix panels using the [esp-hub75](https://github.com/stuartparmenter/esp-hub75) library, which uses DMA (Direct Memory Access) for efficient, low-CPU-overhead driving of LED matrix panels.
 
 HUB75 displays are RGB LED matrix panels that use parallel row updating to create dynamic, colorful displays. They are commonly available in sizes like 64×32, 64×64, and can be chained together to create larger displays.
@@ -7,9 +9,10 @@ HUB75 displays are RGB LED matrix panels that use parallel row updating to creat
 ## Hardware Requirements
 
 ### Supported ESP32 Variants
+- ✅ **ESP32 (I2S)** - Working
 - ✅ **ESP32-S3 (GDMA)** - Working
-- ⏳ **ESP32/S2 (I2S)** - Implemented, untested on hardware
-- ✅ **ESP32-P4 (PARLIO)** - Working (uses PSRAM via EDMA)
+- ✅ **ESP32-P4 (PARLIO)** - Working
+- ⏳ **ESP32S2 (I2S)** - Implemented, untested on hardware
 - ⏳ **ESP32-C6 (PARLIO)** - Implemented, untested on hardware
 - ❌ **ESP32-C3, C2, H2** - Not currently supported
 
@@ -71,6 +74,7 @@ display:
 | `apollo-automation-m1-rev4` | Apollo Automation M1 Rev4 | All 14 HUB75 pins |
 | `apollo-automation-m1-rev6` | Apollo Automation M1 Rev6 | All 14 HUB75 pins |
 | `adafruit-matrix-portal-s3` | Adafruit Matrix Portal S3 | All 14 HUB75 pins |
+| `esp32-trinity` | ESP32 Trinity by Brian Lough | All 14 HUB75 pins |
 | `huidu-hd-wf2` | Huidu HD-WF2 Controller | All 14 HUB75 pins |
 
 ### Board Preset Features
